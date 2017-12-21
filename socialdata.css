@@ -1,0 +1,44 @@
+
+body
+{
+    background-color:#FCFCFC;
+    font-family:Helvetica Neue, AGaramond, sans-serif;
+    font-size:16;
+    color: #000000;
+    margin-bottom: 200px;
+}
+
+
+a {
+    font-weight:bold;
+    text-decoration:none;
+}
+
+a:link {
+    text-decoration:none;
+    }
+
+a:active {
+    text-decoration:none;
+    color:#0099FF
+}
+
+#main
+{
+    margin-top: 45px;
+	text-align: left;
+	width: 600px;
+    margin:auto;
+
+}
+
+#header {
+    margin-top: 130px;
+    margin-bottom: 55px;
+    font: 400 36px "Helvetica Neue";
+    text-align: center;
+}
+
+.desc{
+    margin-left: 25px;
+}
