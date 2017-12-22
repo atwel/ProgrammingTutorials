@@ -18,14 +18,17 @@
   ga('create', 'UA-60671792-1', 'auto');
   ga('send', 'pageview');
 
+ function off(){
+    window.document.getElementById("overlay").style.display = "none";
+}
 </script>
 </head>
 
 <body>
 
 <div id="overlay" onclick=off()>
-<div id="text1">This project was originally funded by a small grant from the University of Michigan's Sociology Department; it was sustained and expanded with support from the University of Michigan's Third Century Initiative</div>
-  </div
+<div id="text1">This project was originally funded by a small grant from the University of Michigan's Sociology Department; it was sustained and expanded with support from the University of Michigan's Third Century Initiative. (Click to begin.)</div>
+  </div>
 
 <div id="header">The Computational Social Science Labs</div>
 
