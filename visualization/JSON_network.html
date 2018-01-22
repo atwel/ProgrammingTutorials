@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<style>
+
+div{
+  width: 90%;
+  height: 90%;
+}
+
+.link {
+  cursor: crosshair;
+  fill: #E8E8E8;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node {
+  cursor: pointer;
+  fill: #ccc;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node.fixed {
+  stroke: "red";
+}
+
+button {
+    position: absolute;
+    width: 30px;
+}
+
+button#play {
+    margin-top: 0px;
+}
+button#stop {
+    margin-top: 28px;
+}
+
+</style>
+<title>Facebook Network</title>
+<body>
+    <button id='play'    title='Run Layout Algorithm'    ><i class='fa fa-play'></i></button>
+    <button id='stop'   title='Stop Layout Algorithm'   ><i class='fa fa-stop'></i></button>
+
+<center>
+<div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script src="network.js"></script>
+</div>
+</center>
+</body>
