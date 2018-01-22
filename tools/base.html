@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.link {
+  cursor: crosshair;
+  fill: #E8E8E8;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node {
+  cursor: pointer;
+  fill: #ccc;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node.fixed {
+  stroke: "red";
+}
+
+</style>
+<title>Retweet Network</title>
+<body>
+<center>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+var width = 1200,
+    height = 950;
+
+var dist = (width + height) / 20;
+
+var force = d3.layout.force()
+    .size([width, height])
+    .linkDistance(function (d) {return d.length*(d.length/100)})
+    .on("tick", tick);
+
+var drag = force.drag()
+    .on("dragstart", dragstart);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var link = svg.selectAll(".link"),
+    node = svg.selectAll(".node");
+        
+
+
+d3.json("fake.json", function(error, graph) {
+  
+  var k = Math.sqrt(graph.nodes.length / (width * height))
+  
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .gravity(100*k)
+      .charge(-10/k)
+      .start();
+
+  link = link.data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke", function(d) { return "black"} )
+      .style("stroke-width", function(d) { return 2.5})
+      .on("click", function(d) { return d.length });
+    
+  link.append("title")
+      .text(function(d) { return "Hours later Retweeted " +d.length;})
+
+  node = node.data(graph.nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", function(d) {return d.value*2 })
+      .style("fill", function(d) { return d.color })
+      .style("stroke", "white")
+      .style("opacity", 1)
+      .text(function(d) { return d.id })
+      .on("dblclick",function(d) {
+            if ( confirm('This is '+d.id+". Do you want to unstick this tweet?" ) ) 
+               d.fixed = false;})
+      .call(drag);
+      
+  node.append("title")
+      .text(function(d) { return d.id; })
+});
+
+function tick() {
+  link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+}
+
+function dragstart(d) {
+  d.fixed = true;
+  d3.select(this).classed("fixed", true);
+}
+
+</script>
+</center>
+</body>
+</html>
